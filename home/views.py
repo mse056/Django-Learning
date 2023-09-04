@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Todo
 
 def sey_hello(request):
     person = {'name':'saleh'}
@@ -6,3 +7,7 @@ def sey_hello(request):
 
 def home(request):
     return render(request, 'home.html')
+
+def all_Todos(request):
+    all = Todo.objects.all()
+    return render(request, 'Todo.html', {'Todos':all})
