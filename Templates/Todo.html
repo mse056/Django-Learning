@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Todo</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+
     {% for todo in Todos %}
         <h3>{{ todo.title }}</h3>
         <small>{{ todo.created }}</small>
         <p>{{ todo.body }}</p>
     {% endfor %}
-</body>
-</html>
+
+{% block content %}
