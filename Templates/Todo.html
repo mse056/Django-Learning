@@ -2,9 +2,7 @@
 {% block content %}
 
     {% for todo in Todos %}
-        <h3>{{ todo.title }}</h3>
-        <small>{{ todo.created }}</small>
-        <p>{{ todo.body }}</p>
+        <a href="/detail/{{ todo.id }}">{{ todo.title }}</a><br/>
     {% endfor %}
 
 {% endblock %}
