@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Todo
-
+from django.contrib import messages
 def sey_hello(request):
     person = {'name':'saleh'}
     return render(request, 'hello.html', context=person)
@@ -18,4 +18,5 @@ def detail(request, todo_id):
 
 def delete(request, todo_id):
     Todo.objects.get(id=todo_id).delete()
+    messages.success(request, 'Todo deleted successfully', 'success')
     return redirect('Todos')
