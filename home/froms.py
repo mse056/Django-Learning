@@ -1,6 +1,6 @@
 from django import forms
 
-class TodoCreateFrom(forms.Form):
+class TodoCreateForm(forms.Form):
     title = forms.CharField()
     body = forms.CharField()
     created = forms.DateTimeField()

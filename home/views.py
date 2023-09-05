@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Todo
 from django.contrib import messages
-from .froms import TodoCreateFrom
+from .froms import TodoCreateForm
 
 def sey_hello(request):
     person = {'name':'saleh'}
@@ -24,5 +24,13 @@ def delete(request, todo_id):
     return redirect('Todos')
 
 def create(request):
-    form = TodoCreateFrom()
+    if request.method == 'POST':
+        form = TodoCreateForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            Todo.objects.create(title=data['title'], body=data['body'], created=data['created'])
+            messages.success(request, 'Todo created successfully', 'success')
+            return redirect('Todos')
+    else:
+        form = TodoCreateForm()
     return render(request, 'create.html', {'form':form})

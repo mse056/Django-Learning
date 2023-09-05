@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
     <h3>Create Todo</h3>
-    <form>
-        {{ form }}
-        <input type="submit", value="Create">
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+    <!-- {{ form.as_table }} -->
+    <!-- {{ form.as_ul }} -->
+        {{ form.as_p }}
+        <input type="submit" value="Create">
     </form>
 {% endblock %}
