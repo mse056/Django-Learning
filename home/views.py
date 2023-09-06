@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Todo
 from django.contrib import messages
-from .froms import TodoCreateForm
+from .froms import TodoCreateForm, TodoUpdateForm
 
 def sey_hello(request):
     person = {'name':'saleh'}
@@ -22,6 +22,18 @@ def delete(request, todo_id):
     Todo.objects.get(id=todo_id).delete()
     messages.success(request, 'Todo deleted successfully', 'success')
     return redirect('Todos')
+
+def update(request, todo_id):
+    todo = Todo.objects.get(id=todo_id)
+    if request.method == 'POST':
+        form = TodoUpdateForm(request.POST, instance=todo)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'you todo updated successfully', 'success')
+            return redirect('details', todo_id)
+    else:
+        form = TodoUpdateForm(instance=todo)
+    return render(request, 'update.html', {'form':form})
 
 def create(request):
     if request.method == 'POST':
